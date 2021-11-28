@@ -35,3 +35,6 @@ def registro(request):
 def pagina(request):
 
     return render(request, 'bases/pagina.html')
+
+def nopor(request):
+    return render(request, 'bases/nopor.html')
