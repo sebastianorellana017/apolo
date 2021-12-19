@@ -15,8 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from miapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('miapp.urls','miapp'), namespace='miapp')),
+    path('nopor/', views.nopor, name='nopor'),
+    path('categoria/<int:category_id>', views.category, name="category"),
 ]
+
+
+# ruta imagenes
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

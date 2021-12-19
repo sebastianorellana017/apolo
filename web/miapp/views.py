@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from .forms import CustomCreationForm
@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 
 from django.contrib.auth.decorators import login_required
+from miapp.models import *
 
 # Create your views here.
 
@@ -34,7 +35,33 @@ def registro(request):
 @login_required(login_url='miapp:login')
 def pagina(request):
 
-    return render(request, 'bases/pagina.html')
+    articles = Article.objects.all()
+
+    return render(request, 'bases/pagina.html', {
+        'title': 'Articulos',
+        'articles': articles
+    })
+
+def category(request, category_id):
+
+    category = get_object_or_404(Category, id=category_id)
+    articles = Article.objects.filter(categories=category_id)
+
+    return render(request, 'bases/category.html', {
+        'category': category,
+        'articles': articles
+    })
+
 
 def nopor(request):
-    return render(request, 'bases/nopor.html')
+
+    articles = Article.objects.all()
+
+    return render(request, 'bases/nopor.html', {
+        'title': 'Articulos',
+        'articles': articles
+    })
+
+    
+
+    #return render(request, 'bases/nopor.html')

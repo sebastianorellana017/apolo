@@ -4,91 +4,22 @@
 
 
 {% block content  %}
+
 <div class="row">
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-      <img
-        src="{% static 'base/img/genyu.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-  
-      <img
-        src="{% static 'base/img/hutao1.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-    </div>
-  
-    <div class="col-lg-4 mb-4 mb-lg-0">
-      <img
-        src="{% static 'base/img/mona.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-  
-      <img
-        src="{% static 'base/img/dawn.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-    </div>
-  
-    <div class="col-lg-4 mb-4 mb-lg-0">
-      <img
-        src="{% static 'base/img/firzt2.jfif' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-  
-      <img
-        src="{% static 'base/img/hutao3.jfif' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-    </div>
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-      <img
-        src="{% static 'base/img/263472300_2673501176279799_7316259042460932048_n.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-  
-      <img
-        src="{% static 'base/img/263298876_1258233538022750_1757088217005316593_n.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-    </div>
-  
-    <div class="col-lg-4 mb-4 mb-lg-0">
-      <img
-        src="{% static 'base/img/263131159_2672770033019580_2273082248199421858_n.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-  
-      <img
-        src="{% static 'base/img/263434255_1257777234735047_1039844836353704488_n.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-    </div>
-  
-    <div class="col-lg-4 mb-4 mb-lg-0">
-      <img
-        src="{% static 'base/img/263454317_604182207492453_5116971904919948166_n.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-  
-      <img
-        src="{% static 'base/img/261918513_2672974176332499_8626355843791415569_n.jpg' %} "
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt=""
-      />
-    </div>
-    
+  <div class="col-9">
+      <div class="row">
+          {% for article in articles %}
+              {% if article.image != 'null' and article.image.url|length >= 1 %}
+              <div class="col-md-3 col-sm-12 col-lg-4">
+                  <div class="card" style="width: 100%">
+                      <img src="{{article.image.url}}" style="width:100%;" class="card-img-top">
+                  </div>
+              </div>
+              {% endif %}
+          {% endfor %}
+      </div>
   </div>
+</div>
 
 
 {% endblock %}

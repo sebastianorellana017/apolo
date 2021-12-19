@@ -40,8 +40,24 @@
         <li class="nav-item">
           <a class="nav-link" href="/pagina">Pagina</a>
         </li>
+
+        <li class="nav-item dropdown">
+          <a  class="nav-link dropdown-toggle active" data-toggle="dropdown" data-target="desplegable" href="/pagina">
+              Categorias XXX
+          </a>
+          <div class="dropdown-menu">
+              {% for category in categories %}
+
+              <a class="dropdown-item" href="{% url 'category' category.0 %}">{{category.1}}</a>
+
+              {% endfor %}
+              
+          </div>
+          
+      </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="/nopor">Genshin</a>
+          <a class="nav-link" href="{% url 'nopor' %}">Genshin</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Contacto</a>
@@ -62,6 +78,8 @@
             </a>
           </div>
         </li>
+
+        
         
 
       </ul>

@@ -1,11 +1,43 @@
-{% extends 'base/base.html' %}
+
 {% load static %}
 
 
 
-{% block content  %}
-<img class="img-fluid" width="1950px" height="30%" src="{% static 'base/img/amber2.png' %} "/>
-<!--<img class="img-fluid" width="1950px" height="30%" src="{% static 'base/img/pcwea.jpg' %} "/>-->
+{% block content %}
+<!--<img class="img-fluid" width="1950px" height="30%" src="{% static 'base/img/amber2.png' %} "/>
+-->
+    
+
+        
+        <!--
+        <div class="row">
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <img src="{{article.image.url}}"
+                     class="w-100 shadow-1-strong rounded mb-4"
+                >
+            </div>
+        </div>
+        -->
+        <div class="row">
+            <div class="col-9">
+                <div class="row">
+                    {% for article in articles %}
+                        {% if article.image != 'null' and article.image.url|length >= 1 %}
+                        <div class="col-md-3 col-sm-12 col-lg-4">
+                            <div class="card" style="width: 100%">
+                                <img src="{{article.image.url}}" style="width:100%;" class="card-img-top">
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        
+        
+
+        
 
 
 {% endblock %}
