@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from miapp.models import *
 
+from django.core.paginator import Paginator
+
 # Create your views here.
 
 class Home(LoginRequiredMixin,generic.TemplateView):
@@ -52,14 +54,31 @@ def category(request, category_id):
         'articles': articles
     })
 
+def article(request, article_id):
+
+    article = get_object_or_404(Article, id=article_id)
+
+    return render(request, 'bases/articles.html', {
+        'article': article
+    })
+
 
 def nopor(request):
-
+    #sacar articulos
     articles = Article.objects.all()
+
+    #paginar para cada articulo
+    paginator = Paginator(articles, 10)
+
+    #recoger numero de pagina
+    page = request.GET.get('page')
+
+    page_articles = paginator.get_page(page)
 
     return render(request, 'bases/nopor.html', {
         'title': 'Articulos',
-        'articles': articles
+        'articles': page_articles,
+        
     })
 
     

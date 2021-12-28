@@ -20,7 +20,7 @@ class Article(models.Model):
     public = models.BooleanField(verbose_name='Publicado?')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
     update_at = models.DateTimeField(auto_now=True, verbose_name="Editado el")
-    #order = models.IntegerField(default=0, verbose_name="Orden")
+    order = models.IntegerField(default=0, verbose_name="Orden")
 
     class Meta:
         verbose_name = 'Articulo'
