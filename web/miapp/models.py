@@ -25,6 +25,7 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'Articulo'
         verbose_name_plural = 'Articulos'
+        ordering = ["-id"]
 
     def __str__(self):
         return self.title
