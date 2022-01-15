@@ -1,35 +1,14 @@
 {% extends 'base/base.html' %}
+
 {% load static %}
 
 
 
 {% block content %}
 
-<!--
-<div class="row">
-    <div class="col-9">
-        <div class="row">
-            {% for article in articles %}
-                {% if article.image != 'null' and article.image.url|length >= 1 %}
-                <div class="col-md-3 col-sm-12 col-lg-4">
-                    <div class="card" style="width: 100%">
-                        <img src="{{article.image.url}}" style="width:100%;" class="card-img-top">
-                    </div>
-                </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
-</div>
--->
-
 
 {% include 'bases/pagina.html' with articles=category.article_set.all %} 
-        
-        
-        
-
-        
+          
 
 
 {% endblock %}

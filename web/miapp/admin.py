@@ -3,7 +3,7 @@ from .models import *
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    readonly_fields = ('user','create_at', 'update_at')
+    readonly_fields = ('create_at', 'update_at')
 
     def save_model(self, request, obj, form, change):
         if not obj.user_id:

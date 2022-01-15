@@ -13,7 +13,7 @@ class Category(models.Model):
         return self.name
 
 class Article(models.Model):
-    user = models.ForeignKey(User, verbose_name='Usuario', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='Usuario', blank=True, null=True, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, verbose_name="Categorias", blank=True) 
     title = models.CharField(max_length=150, blank=True, null=True, verbose_name="Titulo")
     image = models.ImageField(default='null', verbose_name="Imagen", upload_to="articles")

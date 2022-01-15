@@ -5,22 +5,12 @@
 
 {% block content  %}
 
-<div class="btn-group">
-    {% for category in categories %}
-    
-    <li>
-      <a class="btn btn-danger" href="{% url 'category' category.0 %}">{{category.1}}</a>
-    </li>
 
-    {% endfor %}
-      
-    
-</div>
     
     <div class="row">
         <div class="col-9">
             <div class="row">
-                <img src="https://www.lolhentai.net/upload/2016/09/24/20160924065015-64231cc0.gif" alt="">
+                <!--<img src="https://www.lolhentai.net/upload/2016/09/24/20160924065015-64231cc0.gif" alt=""> -->
                 {% for article in articles %}
                     {% if article.image != 'null' and article.image.url|length >= 1 %}
                     <div class="col-md-3 col-sm-12 col-lg-4">

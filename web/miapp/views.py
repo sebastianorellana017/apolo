@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from miapp.models import *
 
 from django.core.paginator import Paginator
+from .forms import ArticlesForm
 
 # Create your views here.
 
@@ -29,7 +30,7 @@ def registro(request):
             user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
             messages.success(request, "te has registrado correctamente")
-            return redirect(to="/pagina")
+            return redirect(to="/nopor")
         data["form"] = formulario
 
     return render(request, 'bases/registro.html', data)
@@ -81,6 +82,78 @@ def nopor(request):
         
     })
 
+    #return render(request, 'bases/nopor.html')
+
+
+def userpage(request):
+
+    articles = Article.objects.all()
+
+    return render(request, 'bases/userpage.html', {
+        'title': 'Articulos',
+        'articles': articles,
+    })
+
+def crear(request):
+
+    if request.method == "POST":
+        formulario = ArticlesForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            post = formulario.save(commit=False)
+            post.autor_id = request.user.id
+            post.save()
+            title = formulario.cleaned_data.get("title")
+            messages.success(request, f"el post {title} fue creado")
+            return redirect('nopor')
+    
+    formulario = ArticlesForm()
+    
+    return render(request, 'bases/crear.html',{
+        'formulario': formulario
+    })
+    
+    #formulario = ArticlesForm(request.POST or None, request.FILES or None)
+    #if formulario.is_valid():
+    #    formulario.save()
+    #    mensaje = formulario.cleaned_data.get("title")
+    #    messages.success(request, f"Se ha creado {mensaje} correctamente")
+    #    return redirect('nopor')
+    #else:
+    #    formulario = ArticlesForm()
+
+    #return render(request, 'bases/crear.html',{
+    #    'formulario': formulario
+    #})
+
+    #data = {
+    #    'form': ArticlesForm()
+    #}
+
+    #if request.method == 'POST':
+    #    formulario = ArticlesForm(data=request.POST)
+    #    if formulario.is_valid():
+     #       formulario.save()
+    #        data["mensaje"] = "Articulo creado"
+     #   else:
+     #       data["form"] = formulario
+
+    #return render(request, 'bases/crear.html', data)
     
 
-    #return render(request, 'bases/nopor.html')
+def editar(request, id):
+
+    articles = Article.objects.get(id=id)
+    formulario = ArticlesForm(request.POST or None, request.FILES or None, instance=articles)
+    if formulario.is_valid() and request.POST:
+        formulario.save()
+        return redirect('userpage')
+
+    return render(request, 'bases/editar.html', {'formulario': formulario})
+
+def borrar(request, id):
+     
+    articles = Article.objects.get(id=id)
+    articles.delete()
+    return redirect('userpage')
+
+    

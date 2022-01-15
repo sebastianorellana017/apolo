@@ -23,7 +23,12 @@ urlpatterns = [
     path('', include(('miapp.urls','miapp'), namespace='miapp')),
     path('nopor/', views.nopor, name='nopor'),
     path('categoria/<int:category_id>', views.category, name="category"),
-    path('article/<int:article_id>', views.article, name="article")
+    path('article/<int:article_id>', views.article, name="article"),
+    path('userpage/', views.userpage, name="userpage"),
+    path('crear/', views.crear, name="crear"),
+    path('editar/<int:id>', views.editar, name="editar"),
+    path('borrar/<int:id>', views.borrar, name="borrar"),
+    
 ]
 
 

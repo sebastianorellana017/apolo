@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<td><a class="btn btn-warning btn-lg btn-block" href="{% url 'crear' %}" role="button">Crear</a></td>
+<br>
+
+
+<div class="row">
+    <div class="col-9">
+        <div class="row">
+            {% for article in articles %}
+                {% if article.image != 'null' and article.image.url|length >= 1 %}
+                <div class="col-md-3 col-sm-12 col-lg-4">
+                    <div class="card" style="width: 60%">
+                        <img src="{{article.image.url}}" style="width:100%;" class="card-img-top">
+                    </div>
+                    <td>
+                        <p>{{ article.title }}</p>
+                        <a class="btn btn-info" href="{% url 'editar' article.id %}" role="button">Editar</a>
+                        <a class="btn btn-danger" href="{% url 'borrar' article.id %}" role="button">Borrar</a>
+                    </td>
+                    
+                </div>
+                {% endif %}
+            {% endfor %}
+
+            
+        </div>
+    </div>
+</div>
+
+
+   
+{% endblock %}

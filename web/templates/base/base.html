@@ -65,7 +65,13 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contacto</a>
         </li>
+        
         <div class="topbar-divider d-none d-sm-block"></div>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'userpage' %}">Userpage</a>
+        </li>
+        {% endif %}
 
         <li class="nav-item  dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -74,17 +80,9 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#">Perfil</a>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-              
-              Salir
-
-            </a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
           </div>
         </li>
-
-        
-        
-
       </ul>
     </div>
     <!-- Sidebar Toggle (Topbar) -->
