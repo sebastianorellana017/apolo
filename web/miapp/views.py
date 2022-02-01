@@ -18,6 +18,16 @@ class Home(LoginRequiredMixin,generic.TemplateView):
     login_url = 'miapp:login'
 
 
+def home(request):
+    articles = Article.objects.all()
+
+    return render(request, 'bases/home.html', {
+        
+        'articles': articles
+    })
+
+
+
 def registro(request):
     data = {
         'form': CustomCreationForm()
@@ -41,7 +51,7 @@ def pagina(request):
     articles = Article.objects.all()
 
     return render(request, 'bases/pagina.html', {
-        'title': 'Articulos',
+        
         'articles': articles
     })
 
@@ -99,6 +109,7 @@ def crear(request):
     if request.method == "POST":
         formulario = ArticlesForm(request.POST, request.FILES)
         if formulario.is_valid():
+            #formulario.save(user=request.user, commit=False)
             post = formulario.save(commit=False)
             post.autor_id = request.user.id
             post.save()
@@ -110,35 +121,7 @@ def crear(request):
     
     return render(request, 'bases/crear.html',{
         'formulario': formulario
-    })
-    
-    #formulario = ArticlesForm(request.POST or None, request.FILES or None)
-    #if formulario.is_valid():
-    #    formulario.save()
-    #    mensaje = formulario.cleaned_data.get("title")
-    #    messages.success(request, f"Se ha creado {mensaje} correctamente")
-    #    return redirect('nopor')
-    #else:
-    #    formulario = ArticlesForm()
-
-    #return render(request, 'bases/crear.html',{
-    #    'formulario': formulario
-    #})
-
-    #data = {
-    #    'form': ArticlesForm()
-    #}
-
-    #if request.method == 'POST':
-    #    formulario = ArticlesForm(data=request.POST)
-    #    if formulario.is_valid():
-     #       formulario.save()
-    #        data["mensaje"] = "Articulo creado"
-     #   else:
-     #       data["form"] = formulario
-
-    #return render(request, 'bases/crear.html', data)
-    
+    })  
 
 def editar(request, id):
 
@@ -155,5 +138,28 @@ def borrar(request, id):
     articles = Article.objects.get(id=id)
     articles.delete()
     return redirect('userpage')
+
+from urllib.request import urlopen
+import json 
+import requests
+
+def apis(request):
+
+    wea = requests.get('https://random-data-api.com/api/commerce/random_commerce?size=100').json()
+
+    paginator = Paginator(wea,9)
+    page = request.GET.get('page')
+    page_wea = paginator.get_page(page)
+
+    
+    return render(request, 'bases/api.html', {'wea': page_wea})
+
+def apiss(request):
+
+    jon = requests.get('https://api-sismologia-chile.herokuapp.com/').json()
+
+    return render(request, 'bases/sismo.html', {'jon': jon})
+
+
 
     

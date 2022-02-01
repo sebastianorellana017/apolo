@@ -4,9 +4,7 @@
 
 
 {% block content  %}
-
-
-    
+   
     <div class="row">
         <div class="col-9">
             <div class="row">
@@ -14,8 +12,9 @@
                 {% for article in articles %}
                     {% if article.image != 'null' and article.image.url|length >= 1 %}
                     <div class="col-md-3 col-sm-12 col-lg-4">
-                        <div class="card" style="width: 100%">
-                            <img src="{{article.image.url}}" style="width:100%;" class="card-img-top">
+                        <div class="gallery-card" style="width: 100%">
+                            <a href="{{article.image.url}}" data-lightbox="roadtrip"><img src="{{article.image.url}}" style="width:100%;" class="card-img-top"></a>
+                            
                         </div>
                     </div>
                     {% endif %}
@@ -25,10 +24,17 @@
             </div>
         </div>
     </div>
+    
+    <br>
+
+    
 
     {% include 'bases/pagination.html' %}
+
+      
 
 
 
 
 {% endblock %}
+

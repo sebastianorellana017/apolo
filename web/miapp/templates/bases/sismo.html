@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+
+{% block content  %}
+
+<!--
+<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@.eltioh/video/7053476586841984261" data-video-id="7053476586841984261" style="max-width: 605px;min-width: 325px;" > <section> <a target="_blank" title="@.eltioh" href="https://www.tiktok.com/@.eltioh">@.eltioh</a> 5 animes H que te dejaran Seco <a title="educacion" target="_blank" href="https://www.tiktok.com/tag/educacion">#educacion</a> <a title="final" target="_blank" href="https://www.tiktok.com/tag/final">#final</a> <a title="noche" target="_blank" href="https://www.tiktok.com/tag/noche">#noche</a> <a title="h" target="_blank" href="https://www.tiktok.com/tag/h">#h</a> <a title="anime" target="_blank" href="https://www.tiktok.com/tag/anime">#anime</a> <a title="eltioh" target="_blank" href="https://www.tiktok.com/tag/eltioh">#eltioh</a> <a target="_blank" title="♬ sonido original - Aqui solo Leemos La Biblia😳🤪" href="https://www.tiktok.com/music/sonido-original-7053476655322516230">♬ sonido original - Aqui solo Leemos La Biblia😳🤪</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script>
+-->
+{% for i in jon %}
+
+<div class="row">
+    <div class="col-9">
+        <div class="row">       
+            {% for i in jon %}
+                <div class="col-md-3 col-sm-12 col-lg-4">
+                    <div class="gallery-card" style="width: 70%">
+                        <a href="{{i.mapa}}" data-lightbox="roadtrip"><img src="{{i.mapa}}" style="width:100%;" class="card-img-top"></a>
+                        <p>{{i.horaLocal}}</p>
+                        <p>{{i.referencia}}</p>
+                        <h6>Latitud {{i.latitud}} - Longitud {{i.longitud}}</h6>
+                        <h3>{{i.magnitud}}</h3>
+                        
+                        
+                    </div>
+                </div>
+            {% endfor %}           
+        </div>
+    </div>
+</div>
+
+<br>
+
+{% endfor %}
+
+{% endblock %}

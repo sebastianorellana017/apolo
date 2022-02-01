@@ -8,5 +8,12 @@ class CustomCreationForm(UserCreationForm):
 class ArticlesForm(forms.ModelForm):
     class Meta:
         model = Article
-        #fields = ['title', 'categories','image','public']
-        fields = '__all__'
+        fields = ['user','title', 'categories','image','public']
+        #fields = '__all__'
+
+        def save(self, **kwargs):
+            user = kwargs.pop('user')
+            instance = super(ArticlesForm, self).save(**kwargs)
+            instance.user = user
+            instance.save()
+            return instance
